@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Color.fromARGB(255, 255, 251, 5),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -64,15 +64,41 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-         Container( width: 55, child: TextFormField(
-  decoration: const InputDecoration(
-    icon: Icon(Icons.person),
-    hintText: 'What do people call you?',
-    labelText: 'Name *',
-  ),
+         Align(
+           alignment: Alignment.center,
+           child: Container(
+             alignment: Alignment.centerLeft,
+             width: 200, 
+             child: TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.search),
+                hintText: 'What do people call you?',
+                labelText: 'Name *',
+                
+              ),
+              ),
+            ),
+         ),
+          Icon(Icons.shopping_cart),
+          
+          ],
+          
 
-),),
-          Icon(Icons.shopping_cart)],
+          bottom: const PreferredSize(
+           preferredSize: Size.fromHeight(10),
+          child:
+           ListTile(
+              leading: Icon(Icons.pin_drop_sharp),
+              iconColor: Colors.black,
+              title: Text("Enviar para Marcelo Queiroz"),
+           ),
+            
+           
+
+
+           ),
+            
+
       leading: Icon(Icons.menu),
       ),
       body: Center(
