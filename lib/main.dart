@@ -1,20 +1,23 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/material.dart';
+import 'package:mercadoaberto/componente/card_fretegratis.dart';
+import 'package:mercadoaberto/componente/carrosel.dart';
+import 'componente/barrapesquisa.dart';
+import 'componente/botaocategoria.dart';
+import 'componente/card_assinatura.dart';
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Color.fromARGB(255, 255, 251, 5),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -23,16 +26,6 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -44,69 +37,99 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
+ String text = "";
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        actions: [
-         Align(
-           alignment: Alignment.center,
-           child: Container(
-             alignment: Alignment.centerLeft,
-             width: 200, 
-             child: TextFormField(
-              decoration: const InputDecoration(
-                icon: Icon(Icons.search),
-                hintText: 'What do people call you?',
-                labelText: 'Name *',
-                
-              ),
-              ),
-            ),
-         ),
-          Icon(Icons.shopping_cart),
+          toolbarHeight: 64,
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Icon(Icons.menu, color:Colors.black ,),
+          ),
+          backgroundColor: Color.fromARGB(255, 245, 212, 21),
+         actions: [
+            CampoPesquisa(),
           
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Icon(Icons.shopping_cart, color:Colors.black ,),
+          ),
           ],
-          
-
-          bottom: const PreferredSize(
+           bottom:  PreferredSize(
            preferredSize: Size.fromHeight(10),
-          child:
+           child:
            ListTile(
-              leading: Icon(Icons.pin_drop_sharp),
+              leading: Icon(Icons.pin_drop_sharp, size:20,), 
               iconColor: Colors.black,
-              title: Text("Enviar para Marcelo Queiroz"),
+              title: GestureDetector(
+                onTap: (){
+                  setState(() {
+                    text =" Marcelo Queiroz";
+                  });
+                },
+                child: Text("Enviar para $text")),
            ),
-            
-           
+         ), 
+       ),
 
-
+      body:Container( 
+          padding: const EdgeInsets.only(
+          left: 15,
+          right: 15,
+          ),
+           decoration: const BoxDecoration(
+           gradient: LinearGradient(
+           begin: Alignment.topCenter,
+           end: FractionalOffset(0.5, 0.2),
+            colors: [
+              Color.fromARGB(255, 245, 212, 21), // Cor amarela
+              Color(0xfff5f5f5), // Cor cinza fundo
+            ],
            ),
-            
+        ), 
+        child: Column(children: [
+            carrosel(),
+            CardFrete(titulo: "dbfds", subtitulo:" em milhões de produtos a partir de R\$79"),
+            CardAssinatura(titulo: "assine por..."),
+                    Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:[
+            botaocategoria(
+              iconeTipo: Icons.abc_outlined, 
+              ),
 
-      leading: Icon(Icons.menu),
+              SizedBox( width: 10,),
+
+        
+
+            botaocategoria(
+              iconeTipo: Icons.access_alarm_outlined, 
+              ),
+
+              SizedBox( width: 10,),
+
+             botaocategoria(
+              iconeTipo: Icons.access_alarm_outlined, 
+              ),
+
+              SizedBox( width: 10,),
+
+              botaocategoria(
+              iconeTipo: Icons.access_alarm_outlined, 
+              ),
+
+              SizedBox( width: 10,),
+
+              ],
+          ),
+        ])
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-      
-      ),
-      
     );
   }
 }
